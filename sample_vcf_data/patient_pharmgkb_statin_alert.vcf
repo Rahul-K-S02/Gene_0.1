@@ -1,0 +1,15 @@
+##fileformat=VCFv4.2
+##fileDate=20260830
+##source=GeneRiskGenomicsEngine_v2.0
+##reference=GRCh38/hg38
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read Depth">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SAMPLE_001
+chr10	94781859	rs4244285	G	A	99	PASS	AF=0.35	GT:DP:GQ	0/1:30:99
+chr12	21178615	rs4149056	T	C	99	PASS	AF=0.35	GT:DP:GQ	0/1:30:99
+chr16	31084274	rs9923231	C	T	99	PASS	AF=0.35	GT:DP:GQ	0/1:30:99
+chr10	94942293	rs1057910	A	C	99	PASS	AF=0.35	GT:DP:GQ	0/1:30:99
+chr1	97078894	rs3918290	C	T	99	PASS	AF=0.35	GT:DP:GQ	0/0:30:99
+chr9	22125503	rs1333049	C	G	99	PASS	AF=0.35	GT:DP:GQ	0/1:30:99

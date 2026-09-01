@@ -1,0 +1,28 @@
+# Node.js / frontend
+node_modules/
+.next/
+dist/
+.vscode/
+.idea/
+# Build output
+build/
+# Environment files
+.env
+.env.*
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+venv/
+.envrc
+# SQLite databases (local dev)
+*.db
+# Logs
+*.log
+# Turso local files (if any)
+*.turso
+# Coverage reports
+coverage/
+# Misc
+.DS_Store

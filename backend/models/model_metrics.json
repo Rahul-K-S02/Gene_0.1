@@ -1,0 +1,62 @@
+{
+  "cad": {
+    "disease_id": "cad",
+    "n_train": 4000,
+    "n_test": 1000,
+    "test_roc_auc": 0.6276,
+    "5fold_cv_auc_mean": 0.6916,
+    "5fold_cv_auc_std": 0.0258,
+    "test_accuracy": 0.674,
+    "test_sensitivity": 0.4375,
+    "test_precision": 0.1571,
+    "brier_score": 0.1969
+  },
+  "t2d": {
+    "disease_id": "t2d",
+    "n_train": 4000,
+    "n_test": 1000,
+    "test_roc_auc": 0.6865,
+    "5fold_cv_auc_mean": 0.7113,
+    "5fold_cv_auc_std": 0.0131,
+    "test_accuracy": 0.669,
+    "test_sensitivity": 0.5396,
+    "test_precision": 0.2193,
+    "brier_score": 0.1959
+  },
+  "ad": {
+    "disease_id": "ad",
+    "n_train": 4000,
+    "n_test": 1000,
+    "test_roc_auc": 0.6866,
+    "5fold_cv_auc_mean": 0.6918,
+    "5fold_cv_auc_std": 0.0361,
+    "test_accuracy": 0.712,
+    "test_sensitivity": 0.5417,
+    "test_precision": 0.2181,
+    "brier_score": 0.1933
+  },
+  "htn": {
+    "disease_id": "htn",
+    "n_train": 4000,
+    "n_test": 1000,
+    "test_roc_auc": 0.6388,
+    "5fold_cv_auc_mean": 0.667,
+    "5fold_cv_auc_std": 0.0173,
+    "test_accuracy": 0.698,
+    "test_sensitivity": 0.4495,
+    "test_precision": 0.1684,
+    "brier_score": 0.1897
+  },
+  "breast_cancer": {
+    "disease_id": "breast_cancer",
+    "n_train": 4000,
+    "n_test": 1000,
+    "test_roc_auc": 0.6651,
+    "5fold_cv_auc_mean": 0.6736,
+    "5fold_cv_auc_std": 0.0157,
+    "test_accuracy": 0.68,
+    "test_sensitivity": 0.5391,
+    "test_precision": 0.1884,
+    "brier_score": 0.1977
+  }
+}

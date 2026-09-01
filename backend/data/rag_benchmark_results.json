@@ -1,0 +1,72 @@
+{
+  "total_test_queries": 4,
+  "mean_groundedness_score": 0.286,
+  "hallucination_contradiction_rate": 0.0,
+  "citation_coverage_pct": 100.0,
+  "detailed_results": [
+    {
+      "query": "How much does adherence to a healthy lifestyle reduce CAD risk in individuals with high genetic risk?",
+      "ground_truth": "A healthy lifestyle reduces CAD risk by approximately 45-50% even in individuals in the highest genetic risk decile.",
+      "rag_response": "Based on your genomic risk profile and published medical guidelines, your results reflect an interplay between inherited polygenic variants and modifiable lifestyle factors. Specifically for your query regarding 'How much does adherence to a healthy lifestyle reduce CAD risk in individuals with high genetic risk?': Clinical evidence demonstrates that high genetic risk does not guarantee disease onset. Targeted behavioral adaptations (e.g. Mediterranean dietary patterns, regular aerobic exercise, and blood pressure control) can offset up to 50% of the genetic hazard. Always review these results with your physician.",
+      "citations_returned": [
+        "AHA Life's Essential 8 - Coronary Risk Modification",
+        "AHA/ACC 2024 Guidelines on Polygenic Risk in Coronary Disease",
+        "Diabetes Prevention Program (DPP) Outcomes Study"
+      ],
+      "matched_factual_terms": [
+        "50%",
+        "lifestyle",
+        "genetic risk",
+        "reduce"
+      ],
+      "groundedness_score": 0.571,
+      "contradiction_detected": false
+    },
+    {
+      "query": "What is the role of TCF7L2 rs7903146 in Type 2 Diabetes risk?",
+      "ground_truth": "TCF7L2 rs7903146 impairs GLP-1 induced insulin secretion and is the strongest common polygenic risk variant for T2D.",
+      "rag_response": "Based on your genomic risk profile and published medical guidelines, your results reflect an interplay between inherited polygenic variants and modifiable lifestyle factors. Specifically for your query regarding 'What is the role of TCF7L2 rs7903146 in Type 2 Diabetes risk?': Clinical evidence demonstrates that high genetic risk does not guarantee disease onset. Targeted behavioral adaptations (e.g. Mediterranean dietary patterns, regular aerobic exercise, and blood pressure control) can offset up to 50% of the genetic hazard. Always review these results with your physician.",
+      "citations_returned": [
+        "ADA 2024 Standards of Care: Polygenic Architecture of T2D",
+        "Diabetes Prevention Program (DPP) Outcomes Study",
+        "AHA/ACC 2024 Guidelines on Polygenic Risk in Coronary Disease"
+      ],
+      "matched_factual_terms": [
+        "tcf7l2"
+      ],
+      "groundedness_score": 0.143,
+      "contradiction_detected": false
+    },
+    {
+      "query": "What are the clinical CPIC recommendations for a CYP2C19 poor metabolizer prescribed clopidogrel?",
+      "ground_truth": "CPIC recommends an alternative antiplatelet agent such as prasugrel or ticagrelor due to reduced active metabolite formation.",
+      "rag_response": "Based on your genomic risk profile and published medical guidelines, your results reflect an interplay between inherited polygenic variants and modifiable lifestyle factors. Specifically for your query regarding 'What are the clinical CPIC recommendations for a CYP2C19 poor metabolizer prescribed clopidogrel?': Clinical evidence demonstrates that high genetic risk does not guarantee disease onset. Targeted behavioral adaptations (e.g. Mediterranean dietary patterns, regular aerobic exercise, and blood pressure control) can offset up to 50% of the genetic hazard. Always review these results with your physician.",
+      "citations_returned": [
+        "CPIC Guidelines for CYP2C19, SLCO1B1, and VKORC1",
+        "AHA/ACC 2024 Guidelines on Polygenic Risk in Coronary Disease",
+        "AHA Life's Essential 8 - Coronary Risk Modification"
+      ],
+      "matched_factual_terms": [
+        "cpic"
+      ],
+      "groundedness_score": 0.143,
+      "contradiction_detected": false
+    },
+    {
+      "query": "How does SLCO1B1 rs4149056 affect statin therapy?",
+      "ground_truth": "SLCO1B1 rs4149056 impairs hepatic OATP1B1 uptake, increasing plasma statin concentrations and raising myopathy/rhabdomyolysis risk.",
+      "rag_response": "Based on your genomic risk profile and published medical guidelines, your results reflect an interplay between inherited polygenic variants and modifiable lifestyle factors. Specifically for your query regarding 'How does SLCO1B1 rs4149056 affect statin therapy?': Clinical evidence demonstrates that high genetic risk does not guarantee disease onset. Targeted behavioral adaptations (e.g. Mediterranean dietary patterns, regular aerobic exercise, and blood pressure control) can offset up to 50% of the genetic hazard. Always review these results with your physician.",
+      "citations_returned": [
+        "CPIC Guidelines for CYP2C19, SLCO1B1, and VKORC1",
+        "Diabetes Prevention Program (DPP) Outcomes Study",
+        "AHA/ACC 2024 Guidelines on Polygenic Risk in Coronary Disease"
+      ],
+      "matched_factual_terms": [
+        "slco1b1",
+        "statin"
+      ],
+      "groundedness_score": 0.286,
+      "contradiction_detected": false
+    }
+  ]
+}
