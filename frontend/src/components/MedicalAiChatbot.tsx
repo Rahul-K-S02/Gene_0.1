@@ -232,7 +232,7 @@ export const MedicalAiChatbot: React.FC<MedicalAiChatbotProps> = ({
                         {m.citations
                           .filter((c) => c.video_url)
                           .map((c, idx) => {
-                            const videoId = c.video_url?.split('v=')[1] || 'z4L3wu5D2eM';
+                            const videoId = c.video_url?.split('v=')[1] || 'BmFEoCFDi-w';
                             return (
                               <div key={idx} className="flex items-center space-x-1">
                                 <button

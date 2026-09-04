@@ -222,54 +222,8 @@ class DatabaseManager:
     def _adapt_write_for_turso(self, query: str, params: tuple) -> tuple:
         """
         Rewrites local-schema INSERT statements to match the remote Turso schema.
-
-        Turso gwas_weights columns:   disease, rs_id, gene, effect_size, risk_allele, maf
-        Turso clinvar_variants cols:  rs_id, gene_name, clinical_significance, condition_name, review_status
-
-        Local gwas INSERT column order:
-          rsid, chromosome, position, gene, disease_id, disease_name, effect_allele, other_allele, beta, maf, p_value, source_pmid
-          index: 0         1          2      3     4           5             6              7          8    9    10       11
-
-        Local clinvar INSERT column order:
-          rsid, gene, clinical_significance, review_status, phenotype
-          index: 0    1         2                  3             4
+        Since the Turso schema now matches the local schema exactly, this just returns the unmodified query.
         """
-        import re
-
-        if "gwas_weights" in query and ("INSERT" in query.upper()):
-            # Rebuild INSERT using only columns Turso knows about
-            # params order: rsid(0), chrom(1), pos(2), gene(3), disease_id(4),
-            #               disease_name(5), effect_allele(6), other_allele(7),
-            #               beta(8), maf(9), p_value(10), source_pmid(11)
-            if len(params) >= 10:
-                turso_sql = """INSERT OR REPLACE INTO gwas_weights
-                    (disease, rs_id, gene, effect_size, risk_allele, maf)
-                    VALUES (?, ?, ?, ?, ?, ?)"""
-                turso_params = (
-                    params[4],   # disease_id -> disease
-                    params[0],   # rsid       -> rs_id
-                    params[3],   # gene
-                    params[8],   # beta       -> effect_size
-                    params[6],   # effect_allele -> risk_allele
-                    params[9],   # maf
-                )
-                return turso_sql, turso_params
-
-        elif "clinvar_variants" in query and ("INSERT" in query.upper()):
-            # params order: rsid(0), gene(1), clinical_significance(2), review_status(3), phenotype(4)
-            if len(params) >= 5:
-                turso_sql = """INSERT OR REPLACE INTO clinvar_variants
-                    (rs_id, gene_name, clinical_significance, condition_name, review_status)
-                    VALUES (?, ?, ?, ?, ?)"""
-                turso_params = (
-                    params[0],   # rsid               -> rs_id
-                    params[1],   # gene               -> gene_name
-                    params[2],   # clinical_significance
-                    params[4],   # phenotype          -> condition_name
-                    params[3],   # review_status
-                )
-                return turso_sql, turso_params
-
         return query, params
 
     def execute_query(self, query: str, params: tuple = ()) -> int:
@@ -307,56 +261,12 @@ class DatabaseManager:
 
     # --- Column Mapping Adapter for Turso ---
     def _adapt_query_for_turso(self, query: str, params: tuple) -> Tuple[str, tuple]:
-        """Translates local schema queries to remote Turso column names."""
-        adapted = query
-
-        # If querying gwas_weights on Turso:
-        # Remote Turso has columns: (disease, rs_id, gene, effect_size, risk_allele, maf)
-        if "FROM gwas_weights" in query or "from gwas_weights" in query:
-            # Map column names in WHERE and SELECT
-            adapted = adapted.replace("disease_id =", "disease =")
-            adapted = adapted.replace("disease_id IN", "disease IN")
-            adapted = adapted.replace("rsid IN", "rs_id IN")
-            adapted = adapted.replace("rsid =", "rs_id =")
-            
-        elif "FROM clinvar_variants" in query or "from clinvar_variants" in query:
-            # Remote Turso has columns: (rs_id, gene_name, clinical_significance, condition_name, review_status)
-            adapted = adapted.replace("rsid IN", "rs_id IN")
-            adapted = adapted.replace("rsid =", "rs_id =")
-
-        return adapted, params
+        """Pass-through since Turso schema matches local schema."""
+        return query, params
 
     def _adapt_rows_from_turso(self, rows: List[Dict[str, Any]], original_query: str) -> List[Dict[str, Any]]:
-        """Normalizes rows returned from remote Turso into application model format."""
-        normalized = []
-        for r in rows:
-            norm_r = dict(r)
-
-            # Map gwas_weights fields
-            if "rs_id" in norm_r and "rsid" not in norm_r:
-                norm_r["rsid"] = norm_r["rs_id"]
-            if "effect_size" in norm_r and "beta" not in norm_r:
-                try:
-                    norm_r["beta"] = float(norm_r["effect_size"])
-                except (ValueError, TypeError):
-                    norm_r["beta"] = 0.0
-            if "risk_allele" in norm_r and "effect_allele" not in norm_r:
-                norm_r["effect_allele"] = norm_r["risk_allele"]
-                norm_r["other_allele"] = norm_r.get("other_allele", "?")
-            if "disease" in norm_r and "disease_id" not in norm_r:
-                norm_r["disease_id"] = norm_r["disease"]
-                norm_r["disease_name"] = norm_r["disease"].replace("_", " ").title()
-
-            # Map clinvar_variants fields
-            if "gene_name" in norm_r and "gene" not in norm_r:
-                norm_r["gene"] = norm_r["gene_name"]
-            if "condition_name" in norm_r and "phenotype" not in norm_r:
-                norm_r["phenotype"] = norm_r["condition_name"]
-            if "accession" not in norm_r:
-                norm_r["accession"] = f"VCV000{abs(hash(str(norm_r.get('rsid', '')))) % 1000000}"
-
-            normalized.append(norm_r)
-        return normalized
+        """Normalizes rows returned from remote Turso."""
+        return [dict(r) for r in rows]
 
 db_manager = DatabaseManager()
 

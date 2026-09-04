@@ -20,7 +20,7 @@ export const GenomicsHandbookModal: React.FC<GenomicsHandbookModalProps> = ({ is
 
   const VIDEO_LIST = [
     {
-      id: 'zwibgNGe46Y',
+      id: 'zwibgNGe4aY',
       title: 'What is DNA and How Does it Work?',
       channel: 'Stated Clearly',
       duration: '5:24',
@@ -44,7 +44,7 @@ export const GenomicsHandbookModal: React.FC<GenomicsHandbookModalProps> = ({ is
       summary: 'Discover how nutrition, exercise, and sleep turn disease-causing genes ON or OFF.'
     },
     {
-      id: '0k57_6f5y28',
+      id: 'XBe4jvvbpQc',
       title: 'Pharmacogenomics: Why Medicines Work Differently',
       channel: 'Mayo Clinic',
       duration: '3:45',

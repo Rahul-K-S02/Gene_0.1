@@ -62,9 +62,9 @@ export const CommonDiseasesAwareness: React.FC = () => {
       ],
       govtSchemeCoverage: '100% Cashless oncology surgeries, radiation therapy, and chemotherapy regimens covered up to ₹5,00,000 under Ayushman Bharat PM-JAY.',
       govtPortalUrl: 'https://beneficiary.nha.gov.in',
-      youtubeId: 'z4L3wu5D2eM',
-      videoTitle: 'How Cancer Cells Grow & How Early Detection Saves Lives',
-      videoChannel: 'TED-Ed / Oncology Guidelines'
+      youtubeId: 'BmFEoCFDi-w',
+      videoTitle: 'How do cancer cells behave differently from healthy ones?',
+      videoChannel: 'TED-Ed / George Zaidan'
     },
     {
       id: 'cad',
@@ -94,8 +94,8 @@ export const CommonDiseasesAwareness: React.FC = () => {
       govtSchemeCoverage: 'Coronary angioplasty, stent placement, and bypass surgeries (CABG) are covered cashlessly under PM-JAY and Arogya Karnataka.',
       govtPortalUrl: 'https://beneficiary.nha.gov.in',
       youtubeId: '3_PYnWVoUzM',
-      videoTitle: 'How a Heart Attack Happens & How to Prevent It',
-      videoChannel: 'TED-Ed / Dr. Sahil Parikh (AHA)'
+      videoTitle: 'What happens during a heart attack? & Prevention',
+      videoChannel: 'TED-Ed / Dr. Krishna Sudhir'
     },
     {
       id: 'diabetes',
@@ -126,9 +126,9 @@ export const CommonDiseasesAwareness: React.FC = () => {
       ],
       govtSchemeCoverage: 'Generic Metformin, Glimepiride, and Teneligliptin are available at 70-90% discount at PM Jan Aushadhi Kendras. Free screenings at Ayushman Arogya Mandirs.',
       govtPortalUrl: 'https://janaushadhi.gov.in',
-      youtubeId: 'MGL6km115JA',
-      videoTitle: 'How Does Diabetes Work & How Can You Reverse It?',
-      videoChannel: 'TED-Ed / ADA Standards of Care'
+      youtubeId: 'JAjZv41iUJU',
+      videoTitle: 'Understanding Type 2 Diabetes: Cause, Symptoms & Care',
+      videoChannel: 'Animated Diabetes Patient / NHS / ADA'
     },
     {
       id: 'stroke',
@@ -160,8 +160,8 @@ export const CommonDiseasesAwareness: React.FC = () => {
       ],
       govtSchemeCoverage: 'Acute stroke stabilization and ICU care are covered under emergency protocols of Ayushman Bharat and Karnataka Harish Scheme.',
       govtPortalUrl: 'https://beneficiary.nha.gov.in',
-      youtubeId: 'pcmhA_53K6E',
-      videoTitle: 'What Happens During a Stroke & B.E. F.A.S.T. Signs',
+      youtubeId: '-NJm4TJ2it0',
+      videoTitle: 'What happens during a stroke? & B.E. F.A.S.T. Signs',
       videoChannel: 'TED-Ed / Dr. Vaibhav Goswami (AHA / ASA)'
     }
   ];

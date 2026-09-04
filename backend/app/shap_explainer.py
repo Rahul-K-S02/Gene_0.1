@@ -210,7 +210,12 @@ class ShapExplainer:
 
     def _load_models_into_memory(self):
         """Loads serialized models and TreeExplainers from disk."""
-        import shap
+        try:
+            import shap
+        except Exception as e:
+            logger.warning(f"SHAP explainer library could not be loaded: {e}. Model predictions will use direct feature importance.")
+            shap = None
+
         for model_file in settings.MODELS_DIR.glob("*_xgb.pkl"):
             d_id = model_file.name.replace("_xgb.pkl", "")
             try:
@@ -218,13 +223,17 @@ class ShapExplainer:
                     model = pickle.load(f)
                     self.models[d_id] = model
 
-                explainer_file = settings.MODELS_DIR / f"{d_id}_explainer.pkl"
-                if explainer_file.exists():
-                    with open(explainer_file, "rb") as ef:
-                        self.explainers[d_id] = pickle.load(ef)
-                else:
-                    self.explainers[d_id] = shap.TreeExplainer(model)
-                logger.info(f"Loaded in-memory XGBoost TreeExplainer for {d_id}")
+                if shap is not None:
+                    explainer_file = settings.MODELS_DIR / f"{d_id}_explainer.pkl"
+                    if explainer_file.exists():
+                        try:
+                            with open(explainer_file, "rb") as ef:
+                                self.explainers[d_id] = pickle.load(ef)
+                        except Exception:
+                            self.explainers[d_id] = shap.TreeExplainer(model)
+                    else:
+                        self.explainers[d_id] = shap.TreeExplainer(model)
+                logger.info(f"Loaded in-memory XGBoost model for {d_id}")
             except Exception as e:
                 logger.warning(f"Could not load model for {d_id}: {e}")
 

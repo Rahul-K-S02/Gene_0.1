@@ -38,7 +38,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "ADA 2024 Standards of Care: Polygenic Architecture of T2D",
         "text": "Type 2 Diabetes risk is strongly influenced by beta-cell transcription factor TCF7L2 rs7903146, which impairs GLP-1 induced insulin secretion. Additional risk alleles at KCNJ11 (rs5215) and PPARG (rs1801282) modulate peripheral insulin sensitivity and adipose storage.",
         "citation": "ADA Standards of Medical Care in Diabetes 2024; Diabetes Care 47(Suppl 1):S1-S343",
-        "video_url": "https://www.youtube.com/watch?v=MGL6km115JA",
+        "video_url": "https://www.youtube.com/watch?v=JAjZv41iUJU",
         "pmid": "38078580"
     },
     {
@@ -48,7 +48,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "Diabetes Prevention Program (DPP) Outcomes Study",
         "text": "Intensive lifestyle intervention (achieving 7% weight reduction and 150 min/wk moderate physical activity) reduces Type 2 Diabetes incidence by 58% in high-risk individuals, outperforming metformin monotherapy (31%). Early prediabetes is reversible with low-glycemic nutrition.",
         "citation": "DPP Research Group. Reduction in the Incidence of Type 2 Diabetes with Lifestyle Intervention. NEJM 2002; 346:393-403",
-        "video_url": "https://www.youtube.com/watch?v=MGL6km115JA",
+        "video_url": "https://www.youtube.com/watch?v=JAjZv41iUJU",
         "pmid": "11832527"
     },
     {
@@ -58,7 +58,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "NCCN 2024 Clinical Guidelines: Genetic/Familial High-Risk Cancer Screening",
         "text": "Pathogenic variants in BRCA1 (rs80357906) and BRCA2 (rs80359550) confer a 60-80% lifetime breast cancer risk and 20-40% ovarian cancer risk. General population screening: Annual or biennial mammography starting at age 40. High-risk carriers: Annual breast MRI + mammography starting at age 25-30. RED FLAG WARNINGS: Hard, painless breast lump, nipple inversion, bloody discharge, skin dimpling, axillary lymph node swelling.",
         "citation": "NCCN Clinical Practice Guidelines in Oncology: Genetic/Familial High-Risk Assessment 2024",
-        "video_url": "https://www.youtube.com/watch?v=z4L3wu5D2eM",
+        "video_url": "https://www.youtube.com/watch?v=BmFEoCFDi-w",
         "pmid": "37841122"
     },
     {
@@ -68,7 +68,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "US Multi-Society Task Force on Colorectal Cancer Screening",
         "text": "Colorectal cancer screening is recommended starting at age 45 for average-risk adults via colonoscopy (every 10 years) or annual fecal immunochemical test (FIT). Lynch syndrome (MLH1, MSH2, MSH6, PMS2) requires colonoscopy every 1-2 years starting at age 20-25. RED FLAG WARNINGS: Rectal bleeding or dark tarry stool, unexplained persistent change in bowel habits (>4 weeks), unintended weight loss, chronic crampy abdominal pain.",
         "citation": "USMSTF Colorectal Cancer Screening Guidelines 2023; Gastroenterology 164(5):1150-1168",
-        "video_url": "https://www.youtube.com/watch?v=z4L3wu5D2eM",
+        "video_url": "https://www.youtube.com/watch?v=BmFEoCFDi-w",
         "pmid": "34045050"
     },
     {
@@ -78,7 +78,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "USPSTF Screening for Lung Cancer & WHO Global Tobacco Report",
         "text": "Tobacco smoke contains over 70 established carcinogens (including benzopyrene and NNK) that directly mutate the TP53 and KRAS tumor suppressor genes. Annual Low-Dose CT (LDCT) is recommended for adults aged 50-80 with a 20 pack-year smoking history. Smoking cessation halts further DNA adduct accumulation and cuts lung cancer risk by 50% after 10 years.",
         "citation": "USPSTF Recommendation Statement: Screening for Lung Cancer. JAMA 2021; 325(10):962-970",
-        "video_url": "https://www.youtube.com/watch?v=z4L3wu5D2eM",
+        "video_url": "https://www.youtube.com/watch?v=BmFEoCFDi-w",
         "pmid": "33687448"
     },
     {
@@ -88,7 +88,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "AHA/ASA Guidelines for the Early Management of Acute Ischemic Stroke",
         "text": "Stroke is a medical emergency where 1.9 million neurons die every minute of ischemia. Use the B.E. F.A.S.T. mnemonic: Balance loss, Eyesight blurring, Face drooping, Arm weakness, Speech slurred/difficulty, Time to call 108/112 immediately. Intravenous thrombolysis (tPA) is effective when administered within the 4.5-hour golden window.",
         "citation": "AHA/ASA Acute Ischemic Stroke Guidelines 2023; Stroke 54(7):e314-e344",
-        "video_url": "https://www.youtube.com/watch?v=pcmhA_53K6E",
+        "video_url": "https://www.youtube.com/watch?v=-NJm4TJ2it0",
         "pmid": "31662094"
     },
     {
@@ -108,7 +108,7 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "ESC/ESH Guidelines for the Management of Arterial Hypertension",
         "text": "Essential hypertension is governed by multi-locus variants in renin-angiotensin-aldosterone signaling (AGT, CYP11B2) and NOS3. Sodium restriction (<2g/day), DASH dietary pattern, potassium supplementation, and aerobic exercise reduce SBP by 8-14 mmHg, counteracting genetic susceptibility and protecting against left ventricular hypertrophy and renal microalbuminuria.",
         "citation": "2023 ESH Guidelines for the management of arterial hypertension. J Hypertens 41(12):1874-2071",
-        "video_url": "https://www.youtube.com/watch?v=vVfF2jL57Bw",
+        "video_url": "https://www.youtube.com/watch?v=Ab9OZsDECZw",
         "pmid": "37345492"
     },
     {
@@ -118,8 +118,38 @@ DEFAULT_KNOWLEDGE_CHUNKS = [
         "title": "CPIC Guidelines for CYP2C19, SLCO1B1, and VKORC1",
         "text": "CPIC recommends alternative antiplatelet therapy (prasugrel/ticagrelor) for CYP2C19 intermediate/poor metabolizers on clopidogrel. For SLCO1B1 rs4149056 carriers, high-dose simvastatin causes statin-associated muscle symptoms, warranting rosuvastatin/pravastatin alternatives. DPYD variant carriers must have 5-FU/capecitabine chemotherapy doses reduced by 50% to prevent fatal toxicity.",
         "citation": "CPIC Guidelines for Clopidogrel & Statins; Clin Pharmacol Ther 2022; 112(5):959-967",
-        "video_url": "https://www.youtube.com/watch?v=0k57_6f5y28",
+        "video_url": "https://www.youtube.com/watch?v=XBe4jvvbpQc",
         "pmid": "35834882"
+    },
+    {
+        "id": "covid19_01",
+        "disease_id": "covid19",
+        "topic": "COVID-19 Host Genetics & Severe Disease Risk",
+        "title": "COVID-19 Host Genetics Initiative",
+        "text": "Genetic susceptibility to severe COVID-19 is strongly linked to a cluster on chromosome 3 (rs11385942, LZTFL1/SLC6A20) and the ABO blood group locus (rs657152). Blood group A is associated with higher risk of respiratory failure, while blood group O is protective. Vaccination and early antiviral therapies (Paxlovid) drastically reduce mortality regardless of genetic risk.",
+        "citation": "COVID-19 Host Genetics Initiative, Nature 2021; 600:472-477",
+        "video_url": "https://www.youtube.com/watch?v=XBe4jvvbpQc",
+        "pmid": "33067605"
+    },
+    {
+        "id": "hiv_01",
+        "disease_id": "hiv",
+        "topic": "HIV-1 Genetic Resistance & CCR5 Mutation",
+        "title": "CCR5-Delta32 and HIV-1 Immunity",
+        "text": "The CCR5-delta32 mutation (rs333) results in a non-functional CCR5 co-receptor on CD4 T-cells. Individuals homozygous for this mutation are highly resistant to HIV-1 infection. Heterozygotes show delayed progression to AIDS. This genetic discovery led to the development of CCR5 inhibitor drugs (Maraviroc) for HIV treatment.",
+        "citation": "Samson M et al. Resistance to HIV-1 infection in Caucasian individuals bearing mutant alleles of the CCR5 chemokine receptor gene. Nature 1996; 382:722-725",
+        "video_url": "",
+        "pmid": "8751444"
+    },
+    {
+        "id": "asthma_01",
+        "disease_id": "asthma",
+        "topic": "Asthma Genetics & Precision Medicine",
+        "title": "GINA Guidelines for Asthma Management",
+        "text": "Asthma has a strong genetic component, particularly variants in IL1RL1 (rs1420101) and GSDMB (rs2305480). Precision management includes avoiding triggers (smoke, allergens) and using inhaled corticosteroids. Biologic therapies targeting Type 2 inflammation (e.g., anti-IL5, anti-IgE) are highly effective for severe genetic phenotypes.",
+        "citation": "Global Initiative for Asthma (GINA) Strategy 2024",
+        "video_url": "",
+        "pmid": "24451229"
     }
 ]
 
@@ -424,27 +454,10 @@ class RagPipeline:
         patient_context: Optional[Dict[str, Any]] = None,
         language: str = "en"
     ) -> Tuple[str, str, List[Dict[str, str]], List[str]]:
-        msg_lower = message.lower()
-        intent = "general"
-        suggested_actions = []
+        intent = "medical_faq"
+        suggested_actions = ["Explain My PRS Score", "Cancer Screening Precautions", "What is a VCF File?"]
 
-        if any(w in msg_lower for w in ["chest pain", "heart attack", "shortness of breath", "severe bleeding", "emergency", "ambulance", "hospital near", "nearest hospital"]):
-            intent = "emergency_hospital"
-            suggested_actions = ["Call Emergency (108 / 112)", "Find Nearest Empaneled Hospital", "Check PM-JAY Emergency Cover"]
-        elif any(w in msg_lower for w in ["cancer", "tumor", "breast cancer", "mammogram", "colonoscopy", "lump", "biopsy", "chemotherapy", "brca", "oncology"]):
-            intent = "cancer_awareness"
-            suggested_actions = ["Check Cancer Warning Signs", "View Recommended Screening Ages", "Explore Free PM-JAY Cancer Cover"]
-        elif any(w in msg_lower for w in ["home remedy", "remedies", "remedy", "acidity", "cough", "sore throat", "bloating", "mild pain", "fatigue", "sleep problem", "indigestion"]):
-            intent = "home_remedy"
-            suggested_actions = ["View Dietary Guidelines", "Schedule Consultation", "Read Clinical Precautions"]
-        elif any(w in msg_lower for w in ["scheme", "ayushman", "pmjay", "jan aushadhi", "bpl", "ration card", "generic medicine", "free treatment", "insurance", "arogya karnataka", "yeshasvini"]):
-            intent = "govt_scheme"
-            suggested_actions = ["Explore PM-JAY ₹5 Lakh Cover", "Locate Jan Aushadhi Kendra", "View Karnataka Arogya Scheme"]
-        else:
-            intent = "medical_faq"
-            suggested_actions = ["Explain My PRS Score", "Cancer Screening Precautions", "What is a VCF File?"]
-
-        evidence_chunks, _ = self.retrieve_relevant_evidence(message, top_k=2)
+        evidence_chunks, _ = self.retrieve_relevant_evidence(message, top_k=3)
         citations = [{"title": c["title"], "citation": c["citation"], "url": c.get("url", ""), "pmid": c.get("pmid", "")} for c in evidence_chunks]
 
         models_to_try = [settings.GROQ_MODEL] + [m for m in settings.GROQ_FALLBACK_MODELS if m != settings.GROQ_MODEL]
@@ -453,21 +466,22 @@ class RagPipeline:
                 try:
                     system_prompt = (
                         "You are Dr. GeneRisk, a compassionate, expert AI Health Assistant. "
-                        "You answer questions regarding medical genetics, preventive health, evidence-based home remedies, "
-                        "emergency hospital triage, and Indian government health schemes (Ayushman Bharat PM-JAY, Jan Aushadhi, Arogya Karnataka). "
+                        "You answer all medical related questions by users in a helpful and evidence-based manner. "
                         "Rules:\n"
-                        "1. For emergency symptoms (e.g. acute chest pain), prioritize dialing emergency helplines (108, 112) immediately.\n"
-                        "2. For home remedies, provide safe, natural habits with standard medical disclaimers.\n"
-                        "3. For government schemes, explain coverage details (₹5 Lakh under PM-JAY, 50-90% discount at Jan Aushadhi) clearly.\n"
-                        f"4. Respond fluently in language: {language}."
+                        "1. Base your answer on the provided medical evidence where applicable.\n"
+                        "2. For emergency symptoms (e.g. acute chest pain), prioritize dialing emergency helplines (108, 112) immediately.\n"
+                        "3. For home remedies, provide safe, natural habits with standard medical disclaimers.\n"
+                        "4. For government schemes, explain coverage details (₹5 Lakh under PM-JAY, 50-90% discount at Jan Aushadhi) clearly.\n"
+                        f"5. Respond fluently in language: {language}."
                     )
 
+                    evidence_text = "\n\n".join([f"[{c['title']}]: {c['text']}" for c in evidence_chunks])
                     messages = [{"role": "system", "content": system_prompt}]
                     for h in conversation_history[-4:]:
                         messages.append({"role": h.get("role", "user"), "content": h.get("content", "")})
 
                     context_str = f"Patient context: {patient_context}\n" if patient_context else ""
-                    messages.append({"role": "user", "content": f"{context_str}User query: {message}"})
+                    messages.append({"role": "user", "content": f"{context_str}Medical Evidence:\n{evidence_text}\n\nUser query: {message}"})
 
                     res = self.groq_client.chat.completions.create(
                         model=model_candidate,
@@ -480,49 +494,9 @@ class RagPipeline:
                 except Exception as e:
                     logger.warning(f"Agent chat model '{model_candidate}' failed: {e}")
 
-        # Deterministic responses
-        if intent == "emergency_hospital":
-            reply = (
-                "🚨 **Medical Alert & Emergency Guidance:**\n"
-                "If you or someone around you is experiencing severe symptoms (acute chest pain, sudden loss of speech, severe difficulty breathing):\n\n"
-                "• **Emergency Ambulance:** Call **108** or **112** immediately.\n"
-                "• **Hospital Treatment:** Under **Ayushman Bharat PM-JAY** and **Karnataka Harish Scheme**, emergency stabilization and ICU care are provided cashlessly at empaneled hospitals."
-            )
-        elif intent == "cancer_awareness":
-            reply = (
-                "🎗️ **Cancer Awareness, Early Detection & Precautions:**\n\n"
-                "• **Top Warning Signs (C.A.U.T.I.O.N.):**\n"
-                "  1. **C**hange in bowel or bladder habits\n"
-                "  2. **A** sore that does not heal\n"
-                "  3. **U**nusual bleeding or discharge\n"
-                "  4. **T**hickening or lump in breast, neck, or lymph node\n"
-                "  5. **I**ndigestion or difficulty swallowing\n"
-                "  6. **O**bvious change in a wart or mole (ABCD rule)\n"
-                "  7. **N**agging cough or hoarseness (>3 weeks)\n\n"
-                "• **Screening:** Mammogram (40+ yrs), Pap/HPV (21-65 yrs), Colonoscopy (45+ yrs).\n"
-                "• **Govt Support:** Covered up to **₹5,00,000** under **PM-JAY**."
-            )
-        elif intent == "home_remedy":
-            reply = (
-                "🌿 **Evidence-Based Supportive Home Guidance:**\n"
-                "• **For Mild Acid Reflux:** Avoid lying down 2 hrs after meals; warm water with cumin/fennel.\n"
-                "• **For Blood Pressure Support:** Deep breathing (10 min daily); sodium <2g/day; DASH dietary pattern.\n"
-                "• **For Mild Throat Irritation:** Warm water with turmeric and honey."
-            )
-        elif intent == "govt_scheme":
-            reply = (
-                "🏥 **Government Health Assistance Schemes:**\n\n"
-                "1. **Ayushman Bharat PM-JAY:** ₹5,00,000/yr per family for cashless hospital treatment. Helpline: **14555**.\n"
-                "2. **PM Jan Aushadhi:** Generic heart & diabetes medications at **50-90% discount**.\n"
-                "3. **Arogya Karnataka:** Full coverage for BPL card holders; subsidized treatment for APL card holders. Helpline: **104**."
-            )
-        else:
-            reply = (
-                "Hello! I am Dr. GeneRisk, your AI Health Assistant. I can help explain your genetic polygenic risk scores, "
-                "suggest lifestyle habits, guide you on government health schemes (PM-JAY, Jan Aushadhi), or provide safe home remedies."
-            )
-
-        return reply, intent, citations, suggested_actions
+        # Fallback using answer_question if Groq fails
+        dynamic_answer, rag_citations, _ = self.answer_question(message, {}, language)
+        return dynamic_answer, intent, rag_citations, suggested_actions
 
     def _extract_prescriptions(self, text: str) -> List[str]:
         lines = text.split("\n")

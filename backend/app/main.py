@@ -21,6 +21,7 @@ from app.govt_schemes import get_govt_schemes
 from app.terminal_logger import (
     print_banner, log_checkpoint, log_gwas_calculation,
     log_clinvar_pharmgkb, log_shap_execution, log_auth_event,
+    log_vcf_parsing_summary, log_lifestyle_fusion, log_shap_and_accuracy, log_report_generation,
     GREEN, RESET, CYAN, YELLOW, BOLD
 )
 from app.schemas import (
@@ -47,12 +48,21 @@ logger = logging.getLogger("generisk.main")
 
 # Initialize database tables and run automatic background readiness checks
 init_tables()
-ensure_clinvar_ready()
-ensure_gwas_ready()
-ensure_models_ready()
-ensure_pubmed_knowledge_ready()
 
-print_banner(f"GeneRisk 2.0 AI Platform Active | Qdrant Collection: {settings.QDRANT_COLLECTION_NAME}")
+import threading
+def _async_startup_checks():
+    ensure_clinvar_ready()
+    ensure_gwas_ready()
+    ensure_models_ready()
+    ensure_pubmed_knowledge_ready()
+
+threading.Thread(target=_async_startup_checks, daemon=True).start()
+
+db_status = "Turso Cloud (Remote)" if db_manager.is_turso_active else "Local SQLite (Offline)"
+print_banner(f"GeneRisk 2.0 AI Platform Active | DB: {db_status} | Qdrant: {settings.QDRANT_COLLECTION_NAME}")
+
+# Print full algorithm validation & accuracy scores on startup
+log_shap_and_accuracy(shap_explainer.metrics, None)
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -528,6 +538,7 @@ async def analyze_genomic_risk(request: Request):
 
             uploaded_file = form.get("file")
             if uploaded_file and hasattr(uploaded_file, "filename") and uploaded_file.filename:
+                vcf_t0 = time.time()
                 suffix = Path(uploaded_file.filename).suffix
                 with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
                     content = await uploaded_file.read()
@@ -536,6 +547,8 @@ async def analyze_genomic_risk(request: Request):
 
                 target_rsids = prs_engine.get_supported_rsids()
                 genomic_data = parse_vcf_stream(tmp_path, target_rsids=target_rsids, delete_after=True)
+                vcf_ms = (time.time() - vcf_t0) * 1000.0
+                log_vcf_parsing_summary(uploaded_file.filename, len(content.split(b"\n")), len(genomic_data), len(target_rsids), vcf_ms)
         except HTTPException:
             raise
         except Exception as e:
@@ -550,7 +563,10 @@ async def analyze_genomic_risk(request: Request):
         except Exception:
             raise HTTPException(status_code=400, detail="Unsupported Content-Type.")
 
-    print_banner(f"NEW GENOMIC ANALYSIS: Patient {lifestyle.age}yo {lifestyle.sex.upper()} | BMI {lifestyle.bmi} | SBP {lifestyle.systolic_bp} mmHg")
+    import time
+    start_time = time.time()
+    
+    print_banner(f"NEW GENOMIC RISK ANALYSIS | Patient: {lifestyle.age}yo {lifestyle.sex.upper()} | BMI {lifestyle.bmi} kg/m² | SBP {lifestyle.systolic_bp} mmHg")
 
     # 1. PRS Standardized Scoring
     prs_results = prs_engine.compute_all_prs(genomic_data)
@@ -606,11 +622,9 @@ async def analyze_genomic_risk(request: Request):
 
     disease_risk_results.sort(key=lambda x: x.fused_absolute_risk_10yr, reverse=True)
 
-    # Log SHAP for primary risk disease
-    if disease_risk_results:
-        top_d = disease_risk_results[0]
-        sorted_feats = sorted(top_d.shap_feature_importance.items(), key=lambda x: abs(x[1]), reverse=True)
-        log_shap_execution(top_d.shap_mode, sorted_feats)
+    # Log Lifestyle Fusion and Algorithm Accuracy / SHAP Benchmarks
+    log_lifestyle_fusion(lifestyle, disease_risk_results)
+    log_shap_and_accuracy(shap_explainer.metrics, disease_risk_results[0] if disease_risk_results else None)
 
     patient_dict = {
         "age": lifestyle.age,
@@ -647,8 +661,7 @@ async def analyze_genomic_risk(request: Request):
         pdf_b64 = None
 
     analysis_id = f"GR-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}-{abs(hash(str(patient_dict))) % 10000}"
-
-    print(f"\n{GREEN}[ANALYSIS COMPLETE]{RESET} Analysis ID: {analysis_id} | Multi-disease PDF generated in memory | Synced with MongoDB.")
+    log_report_generation(len(pdf_b64) if pdf_b64 else 0, time.time() - start_time, analysis_id)
 
     return AnalysisResponse(
         analysis_id=analysis_id,
