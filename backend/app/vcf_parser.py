@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 from typing import Dict, Set, Optional, Tuple
 
+from app.vcf_coords_map import TARGET_COORDINATE_MAP
+
 logger = logging.getLogger("generisk.vcf_parser")
 
 def parse_genotype_to_dosage(gt_str: str) -> Optional[float]:
@@ -71,11 +73,20 @@ def parse_vcf_stream(
                 if len(parts) < 10:
                     continue
                 
-                rsid = parts[2].strip()
-                if not rsid.startswith("rs"):
-                    continue
-                
-                if target_rsids is not None and rsid not in target_rsids:
+                raw_rsid = parts[2].strip()
+                matched_rsid = None
+                if raw_rsid.startswith("rs") and (target_rsids is None or raw_rsid in target_rsids):
+                    matched_rsid = raw_rsid
+                elif not raw_rsid.startswith("rs") or raw_rsid == ".":
+                    chrom = parts[0].strip().lower().replace("chr", "")
+                    pos = parts[1].strip()
+                    coord_key = f"{chrom}:{pos}"
+                    if coord_key in TARGET_COORDINATE_MAP:
+                        candidate_rs = TARGET_COORDINATE_MAP[coord_key]
+                        if target_rsids is None or candidate_rs in target_rsids:
+                            matched_rsid = candidate_rs
+
+                if not matched_rsid:
                     continue
                 
                 format_col = parts[8]
@@ -95,7 +106,7 @@ def parse_vcf_stream(
                 if gt_val:
                     dosage = parse_genotype_to_dosage(gt_val)
                     if dosage is not None:
-                        dosages[rsid] = dosage
+                        dosages[matched_rsid] = dosage
                         
         logger.info(f"Successfully extracted {len(dosages)} target SNPs from VCF.")
     except Exception as e:

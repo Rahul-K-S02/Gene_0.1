@@ -235,14 +235,39 @@ class RagPipeline:
             try:
                 existing_cols = [c.name for c in self.qdrant_client.get_collections().collections]
                 if self.collection_name in existing_cols:
+                    # In newer qdrant-client >= 1.10+, query_points is used with named vector
+                    using_vector = "fast-bge-small-en-v1.5"
+                    try:
+                        col_info = self.qdrant_client.get_collection(self.collection_name)
+                        vectors_cfg = col_info.config.params.vectors
+                        if isinstance(vectors_cfg, dict) and vectors_cfg:
+                            using_vector = list(vectors_cfg.keys())[0]
+                        else:
+                            using_vector = None
+                    except Exception:
+                        using_vector = "fast-bge-small-en-v1.5"
+
                     query_embeddings = list(self.embedder.embed([query]))
                     query_vector = query_embeddings[0].tolist()
 
-                    hits = self.qdrant_client.search(
-                        collection_name=self.collection_name,
-                        query_vector=query_vector,
-                        limit=top_k
-                    )
+                    if hasattr(self.qdrant_client, "query_points"):
+                        query_kwargs = {
+                            "collection_name": self.collection_name,
+                            "query": query_vector,
+                            "limit": top_k
+                        }
+                        if using_vector:
+                            query_kwargs["using"] = using_vector
+                        q_res = self.qdrant_client.query_points(**query_kwargs)
+                        hits = q_res.points
+                    elif hasattr(self.qdrant_client, "search"):
+                        hits = self.qdrant_client.search(
+                            collection_name=self.collection_name,
+                            query_vector=query_vector,
+                            limit=top_k
+                        )
+                    else:
+                        hits = []
 
                     for hit in hits:
                         if not hit.payload:

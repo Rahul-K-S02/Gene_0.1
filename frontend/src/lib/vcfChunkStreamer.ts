@@ -1,4 +1,5 @@
 import * as pako from 'pako';
+import { TARGET_COORDINATE_MAP } from './vcfCoordinatesMap';
 
 export const SUPPORTED_TARGET_RSIDS = new Set([
   'rs1333049', 'rs693', 'rs10455872', 'rs11591147', 'rs20455', 'rs4970834', 'rs17465637',
@@ -28,6 +29,27 @@ function parseGenotype(gtStr: string): number | null {
   return null;
 }
 
+function resolveRsidOrCoordinate(parts: string[]): string | null {
+  // 1. Check if ID column has a direct rsID match
+  const rawId = parts[2]?.trim();
+  if (rawId && SUPPORTED_TARGET_RSIDS.has(rawId)) {
+    return rawId;
+  }
+
+  // 2. Fallback: match by chromosomal coordinate (supports GIAB, WGS with ID=".")
+  const chrom = parts[0]?.trim().toLowerCase().replace('chr', '');
+  const pos = parts[1]?.trim();
+  if (chrom && pos) {
+    const coordKey = `${chrom}:${pos}`;
+    const matchedRsid = TARGET_COORDINATE_MAP[coordKey];
+    if (matchedRsid) {
+      return matchedRsid;
+    }
+  }
+
+  return null;
+}
+
 export async function streamAndParseVcfInBrowser(
   file: File,
   onProgress?: (progressPct: number, statusText: string) => void
@@ -48,7 +70,7 @@ export async function streamAndParseVcfInBrowser(
       text = new TextDecoder('utf-8').decode(buffer);
     }
 
-    onProgress?.(70, 'Scanning SNP panel variants...');
+    onProgress?.(70, 'Scanning SNP panel variants & loci coordinates...');
     const lines = text.split('\n');
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -56,8 +78,8 @@ export async function streamAndParseVcfInBrowser(
       const parts = line.trim().split('\t');
       if (parts.length < 10) continue;
 
-      const rsid = parts[2]?.trim();
-      if (rsid && SUPPORTED_TARGET_RSIDS.has(rsid)) {
+      const matchedRsid = resolveRsidOrCoordinate(parts);
+      if (matchedRsid) {
         const formatKeys = parts[8]?.split(':') || [];
         const sampleVals = parts[9]?.split(':') || [];
         let gtVal = sampleVals[0];
@@ -68,7 +90,7 @@ export async function streamAndParseVcfInBrowser(
 
         const dosage = parseGenotype(gtVal);
         if (dosage !== null) {
-          extractedDosages[rsid] = dosage;
+          extractedDosages[matchedRsid] = dosage;
         }
       }
     }
@@ -95,8 +117,8 @@ export async function streamAndParseVcfInBrowser(
       const parts = line.trim().split('\t');
       if (parts.length < 10) continue;
 
-      const rsid = parts[2]?.trim();
-      if (rsid && SUPPORTED_TARGET_RSIDS.has(rsid)) {
+      const matchedRsid = resolveRsidOrCoordinate(parts);
+      if (matchedRsid) {
         const formatKeys = parts[8]?.split(':') || [];
         const sampleVals = parts[9]?.split(':') || [];
         let gtVal = sampleVals[0];
@@ -107,7 +129,7 @@ export async function streamAndParseVcfInBrowser(
 
         const dosage = parseGenotype(gtVal);
         if (dosage !== null) {
-          extractedDosages[rsid] = dosage;
+          extractedDosages[matchedRsid] = dosage;
         }
       }
     }
