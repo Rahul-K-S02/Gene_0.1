@@ -83,19 +83,20 @@ def compute_lifestyle_multipliers(lifestyle: LifestyleFactors, disease_id: str) 
         drivers.append(f"Suboptimal diet quality (Score {diet}/10)")
     mults["diet"] = diet_rr
 
-    # 5. Systolic Blood Pressure
+    # 5. Blood Pressure (Systolic & Diastolic)
     sbp = lifestyle.systolic_bp
-    if sbp >= 140:
-        sbp_rr = 1.60 if disease_id in ("cad", "htn") else 1.20
-        drivers.append(f"Stage 2 Systolic Hypertension ({sbp} mmHg)")
-    elif sbp >= 130:
-        sbp_rr = 1.30 if disease_id in ("cad", "htn") else 1.10
-        drivers.append(f"Stage 1 Elevated SBP ({sbp} mmHg)")
-    elif sbp < 110:
-        sbp_rr = 0.95
+    dbp = getattr(lifestyle, "diastolic_bp", None) or 80
+    if sbp >= 140 or dbp >= 90:
+        bp_rr = 1.60 if disease_id in ("cad", "htn") else 1.20
+        drivers.append(f"Stage 2 Hypertension ({sbp}/{dbp} mmHg)")
+    elif sbp >= 130 or dbp >= 80:
+        bp_rr = 1.30 if disease_id in ("cad", "htn") else 1.10
+        drivers.append(f"Stage 1 Elevated BP ({sbp}/{dbp} mmHg)")
+    elif sbp < 110 and dbp < 70:
+        bp_rr = 0.95
     else:
-        sbp_rr = 1.00
-    mults["blood_pressure"] = sbp_rr
+        bp_rr = 1.00
+    mults["blood_pressure"] = bp_rr
 
     # 6. Sleep Duration
     sleep = lifestyle.sleep_hours

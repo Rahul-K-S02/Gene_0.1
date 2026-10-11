@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { sendChatQuestion } from '../lib/api';
 import { MessageSquare, X, Send, Bot, User, Sparkles, BookOpen } from 'lucide-react';
+import { FormattedMessage } from './FormattedMessage';
 
 interface RagChatModalProps {
   isOpen: boolean;
@@ -125,7 +126,7 @@ export const RagChatModal: React.FC<RagChatModalProps> = ({
                     : 'bg-white border border-slate-200 text-slate-800'
                 }`}
               >
-                <p className="whitespace-pre-wrap">{msg.content}</p>
+                <FormattedMessage content={msg.content} isUser={msg.role === 'user'} />
 
                 {msg.citations && msg.citations.length > 0 && (
                   <div className="mt-2.5 pt-2 border-t border-slate-100 text-[10px] text-slate-500">

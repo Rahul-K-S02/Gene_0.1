@@ -45,6 +45,7 @@ const DEFAULT_LIFESTYLE: LifestyleFactors = {
   physical_activity_hours_per_week: 2.0,
   mediterranean_diet_score: 6,
   systolic_bp: 128,
+  diastolic_bp: 82,
   sleep_hours: 7.0,
   alcohol_drinks_per_week: 3.0,
   family_history_cad: true,

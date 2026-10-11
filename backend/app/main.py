@@ -633,6 +633,7 @@ async def analyze_genomic_risk(request: Request):
         "smoking_status": lifestyle.smoking_status,
         "physical_activity": lifestyle.physical_activity_hours_per_week,
         "systolic_bp": lifestyle.systolic_bp,
+        "diastolic_bp": getattr(lifestyle, "diastolic_bp", 80) or 80,
         "diet_score": lifestyle.mediterranean_diet_score,
         "sleep_hours": lifestyle.sleep_hours
     }

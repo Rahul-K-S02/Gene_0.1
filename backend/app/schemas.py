@@ -73,6 +73,7 @@ class LifestyleFactors(BaseModel):
     physical_activity_hours_per_week: float = Field(default=2.5, ge=0.0, le=40.0, description="Activity hours/week")
     mediterranean_diet_score: int = Field(default=6, ge=0, le=10, description="Adherence score (0-10)")
     systolic_bp: int = Field(default=120, ge=80, le=240, description="Systolic Blood Pressure (mmHg)")
+    diastolic_bp: Optional[int] = Field(default=80, ge=40, le=140, description="Diastolic Blood Pressure (mmHg)")
     sleep_hours: float = Field(default=7.0, ge=3.0, le=14.0, description="Average sleep hours per night")
     alcohol_drinks_per_week: float = Field(default=2.0, ge=0.0, le=70.0, description="Standard alcoholic drinks per week")
     family_history_cad: bool = Field(default=False)

@@ -1,15 +1,6 @@
 import * as pako from 'pako';
 import { TARGET_COORDINATE_MAP } from './vcfCoordinatesMap';
-
-export const SUPPORTED_TARGET_RSIDS = new Set([
-  'rs1333049', 'rs693', 'rs10455872', 'rs11591147', 'rs20455', 'rs4970834', 'rs17465637',
-  'rs7903146', 'rs5215', 'rs1801282', 'rs9939609', 'rs10811661', 'rs13266634',
-  'rs429358', 'rs7412', 'rs11136000', 'rs3818361', 'rs744373',
-  'rs699', 'rs1799983', 'rs5186', 'rs11730589', 'rs2384550',
-  'rs2981582', 'rs3803662', 'rs889312', 'rs13281615',
-  'rs80357906', 'rs80359550', 'rs121908028', 'rs121913627', 'rs121912497',
-  'rs4244285', 'rs4149056', 'rs9923231', 'rs1057910', 'rs3918290'
-]);
+import { SUPPORTED_TARGET_RSIDS } from './supportedRsids';
 
 function parseGenotype(gtStr: string): number | null {
   if (!gtStr || gtStr === './.' || gtStr === '.|.' || gtStr === '.') return null;

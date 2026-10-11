@@ -7,6 +7,7 @@ import {
   Bot, MessageSquare, X, Send, Sparkles, ShieldAlert,
   HeartPulse, Landmark, Pill, ChevronDown, Video, Play, ExternalLink, Ribbon
 } from 'lucide-react';
+import { FormattedMessage } from './FormattedMessage';
 
 interface MedicalAiChatbotProps {
   patientContext?: Record<string, any>;
@@ -193,7 +194,7 @@ export const MedicalAiChatbot: React.FC<MedicalAiChatbotProps> = ({
                       : 'bg-white border border-slate-200 text-slate-800'
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{m.text}</p>
+                  <FormattedMessage content={m.text} isUser={m.sender === 'user'} />
 
                   {/* Intent Tag */}
                   {m.intent && m.intent !== 'general' && (

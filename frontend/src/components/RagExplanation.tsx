@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Sparkles, FileDown, MessageSquareQuote, BookOpen, CheckCircle, ExternalLink, Play } from 'lucide-react';
+import { FormattedMessage } from './FormattedMessage';
 
 interface CitationItem {
   title: string;
@@ -78,10 +79,8 @@ export const RagExplanation: React.FC<RagExplanationProps> = ({
       </div>
 
       {/* Narrative Body */}
-      <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-xs text-slate-700 leading-relaxed space-y-2.5 mb-5 font-normal">
-        {narrative.split('\n\n').map((para, i) => (
-          <p key={i}>{para.replace(/###/g, '').replace(/\*\*/g, '')}</p>
-        ))}
+      <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-xs text-slate-700 leading-relaxed mb-5">
+        <FormattedMessage content={narrative} />
       </div>
 
       {/* Actionable Prescriptions */}

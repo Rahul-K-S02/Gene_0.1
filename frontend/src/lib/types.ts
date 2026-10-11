@@ -18,6 +18,7 @@ export interface LifestyleFactors {
   physical_activity_hours_per_week: number;
   mediterranean_diet_score: number;
   systolic_bp: number;
+  diastolic_bp?: number;
   sleep_hours: number;
   alcohol_drinks_per_week: number;
   family_history_cad: boolean;

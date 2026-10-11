@@ -21,6 +21,7 @@ export const LifestyleForm: React.FC<LifestyleFormProps> = ({
   const [weightKg, setWeightKg] = useState(78);
   const [showBmiCalc, setShowBmiCalc] = useState(false);
   const [showBpHelper, setShowBpHelper] = useState(false);
+  const [showDietGuide, setShowDietGuide] = useState(false);
 
   const updateField = <K extends keyof LifestyleFactors>(
     field: K,
@@ -163,75 +164,81 @@ export const LifestyleForm: React.FC<LifestyleFormProps> = ({
           )}
         </div>
 
-        {/* Systolic Blood Pressure with Category Helper */}
-        <div>
+        {/* Blood Pressure — Systolic + Diastolic */}
+        <div className="sm:col-span-2 md:col-span-1">
           <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-bold text-slate-700">Systolic Blood Pressure (BP)</label>
+            <label className="text-xs font-bold text-slate-700">Blood Pressure (mmHg)</label>
             <button
               type="button"
               onClick={() => setShowBpHelper(!showBpHelper)}
               className="text-[11px] font-bold text-brand-600 hover:underline"
             >
-              {showBpHelper ? 'Enter number' : 'Don\'t know BP?'}
+              {showBpHelper ? 'Enter numbers' : "Don't know BP?"}
             </button>
           </div>
 
           {showBpHelper ? (
             <div className="rounded-2xl bg-slate-50 p-2.5 border border-slate-200 space-y-1 text-[11px]">
-              <button
-                type="button"
-                onClick={() => {
-                  updateField('systolic_bp', 118);
-                  setShowBpHelper(false);
-                }}
-                className="w-full text-left p-1.5 rounded-lg hover:bg-white font-medium text-slate-700"
-              >
-                💚 Normal / Healthy (~118 mmHg)
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  updateField('systolic_bp', 128);
-                  setShowBpHelper(false);
-                }}
-                className="w-full text-left p-1.5 rounded-lg hover:bg-white font-medium text-slate-700"
-              >
-                💛 Slightly Elevated (~128 mmHg)
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  updateField('systolic_bp', 138);
-                  setShowBpHelper(false);
-                }}
-                className="w-full text-left p-1.5 rounded-lg hover:bg-white font-medium text-slate-700"
-              >
-                🧡 Stage 1 High BP (~138 mmHg)
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  updateField('systolic_bp', 148);
-                  setShowBpHelper(false);
-                }}
-                className="w-full text-left p-1.5 rounded-lg hover:bg-white font-medium text-slate-700"
-              >
-                ❤️ Stage 2 High BP / On Pills (~148 mmHg)
-              </button>
+              {[
+                { emoji: '💚', label: 'Normal / Healthy', sbp: 118, dbp: 76 },
+                { emoji: '💛', label: 'Slightly Elevated', sbp: 128, dbp: 82 },
+                { emoji: '🧡', label: 'Stage 1 High BP', sbp: 138, dbp: 88 },
+                { emoji: '❤️', label: 'Stage 2 High BP', sbp: 148, dbp: 95 },
+              ].map(({ emoji, label, sbp, dbp }) => (
+                <button
+                  key={sbp}
+                  type="button"
+                  onClick={() => {
+                    onChange({ ...lifestyle, systolic_bp: sbp, diastolic_bp: dbp });
+                    setShowBpHelper(false);
+                  }}
+                  className="w-full text-left p-1.5 rounded-lg hover:bg-white font-medium text-slate-700"
+                >
+                  {emoji} {label} (~{sbp}/{dbp})
+                </button>
+              ))}
             </div>
           ) : (
-            <div className="relative">
-              <input
-                type="number"
-                min={80}
-                max={240}
-                value={lifestyle.systolic_bp}
-                onChange={(e) => updateField('systolic_bp', parseInt(e.target.value) || 120)}
-                className="w-full rounded-2xl border border-slate-300 px-3.5 py-2.5 text-xs font-semibold focus:border-brand-500 bg-white"
-              />
-              <span className="absolute right-3.5 top-2.5 text-xs text-slate-400 font-semibold">
-                mmHg
-              </span>
+            <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="relative">
+                  <span className="absolute left-2.5 top-[9px] text-[10px] text-slate-400 font-bold pointer-events-none">SYS</span>
+                  <input
+                    type="number"
+                    min={80}
+                    max={240}
+                    value={lifestyle.systolic_bp}
+                    onChange={(e) => updateField('systolic_bp', parseInt(e.target.value) || 120)}
+                    className="w-full rounded-2xl border border-slate-300 pl-9 pr-2.5 py-2.5 text-xs font-semibold focus:border-brand-500 bg-white"
+                  />
+                </div>
+                <div className="relative">
+                  <span className="absolute left-2.5 top-[9px] text-[10px] text-slate-400 font-bold pointer-events-none">DIA</span>
+                  <input
+                    type="number"
+                    min={40}
+                    max={140}
+                    value={lifestyle.diastolic_bp ?? 80}
+                    onChange={(e) => updateField('diastolic_bp', parseInt(e.target.value) || 80)}
+                    className="w-full rounded-2xl border border-slate-300 pl-9 pr-2.5 py-2.5 text-xs font-semibold focus:border-brand-500 bg-white"
+                  />
+                </div>
+              </div>
+              {(() => {
+                const sbp = lifestyle.systolic_bp;
+                const dbp = lifestyle.diastolic_bp ?? 80;
+                let cat = '', color = '';
+                if (sbp < 120 && dbp < 80) { cat = 'Normal'; color = 'text-emerald-600 bg-emerald-50 border-emerald-200'; }
+                else if (sbp < 130 && dbp < 80) { cat = 'Elevated'; color = 'text-amber-600 bg-amber-50 border-amber-200'; }
+                else if (sbp < 140 || dbp < 90) { cat = 'Stage 1 Hypertension'; color = 'text-orange-600 bg-orange-50 border-orange-200'; }
+                else { cat = 'Stage 2 Hypertension'; color = 'text-rose-600 bg-rose-50 border-rose-200'; }
+                return (
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-[10px] text-slate-500 font-semibold">{sbp}/{dbp} —</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${color}`}>{cat}</span>
+                  </div>
+                );
+              })()}
             </div>
           )}
         </div>
@@ -274,7 +281,17 @@ export const LifestyleForm: React.FC<LifestyleFormProps> = ({
         {/* Mediterranean Diet */}
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="text-xs font-bold text-slate-700">Healthy Diet Score</label>
+            <div className="flex items-center space-x-1.5">
+              <label className="text-xs font-bold text-slate-700">Healthy Diet Score</label>
+              <button
+                type="button"
+                onClick={() => setShowDietGuide(!showDietGuide)}
+                title="What food gives a high score?"
+                className="flex items-center justify-center h-4 w-4 rounded-full bg-brand-100 text-brand-600 hover:bg-brand-200 transition-colors"
+              >
+                <Info className="h-2.5 w-2.5" />
+              </button>
+            </div>
             <span className="text-xs font-black text-brand-600">
               {lifestyle.mediterranean_diet_score} / 10
             </span>
@@ -290,6 +307,22 @@ export const LifestyleForm: React.FC<LifestyleFormProps> = ({
             }
             className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600"
           />
+          {showDietGuide && (
+            <div className="mt-2 rounded-2xl border border-emerald-200 bg-emerald-50 p-3 text-[11px] space-y-2">
+              <p className="font-black text-emerald-800 text-[10px] uppercase tracking-wider">🥗 What to eat for a high score</p>
+              {[
+                { range: '9–10 ⭐ Excellent', color: 'text-emerald-700', items: 'Olive oil daily, oily fish 3×/wk, ≥5 portions veg & fruit, legumes 4×/wk, whole grains every meal, nuts 30g/day, red meat <1×/wk, no added sugar' },
+                { range: '7–8 ✅ Good', color: 'text-teal-700', items: 'Olive oil most days, fish 2×/wk, 3–4 portions veg/fruit, legumes 3×/wk, mostly whole grains, nuts a few times/wk, red meat ≤2×/wk' },
+                { range: '4–6 🟡 Average', color: 'text-amber-700', items: 'Mix of healthy and processed foods, some veg/fruit, occasional fish, refined carbs common, moderate red meat, some sugar' },
+                { range: '1–3 🔴 Poor', color: 'text-rose-700', items: 'High in red/processed meat, refined grains, added sugars, fried food, low veg & fruit intake, low fibre' },
+              ].map(({ range, color, items }) => (
+                <div key={range}>
+                  <span className={`font-bold ${color}`}>{range}</span>
+                  <p className="text-slate-600 mt-0.5 leading-relaxed">{items}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Sleep Duration */}
